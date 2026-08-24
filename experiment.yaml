@@ -1,0 +1,106 @@
+experiment:
+  name: sliceheads_10heads_v0
+  description: "All 10 heads benchmark on dataset_normal.h5"
+
+data:
+  h5_path: dataset_normal.h5
+
+search_strategy: grid
+
+training:
+  device: cpu
+  random_seed: 42
+  selection_metric: roc_auc
+
+heads:
+  # ── Pooling (sklearn) ────────────────────────────────────────────────────
+  MeanPoolClassifier:
+    enabled: true
+    hyperparameters:
+      C: [0.001, 0.01, 0.1, 1.0, 10.0]
+      class_weight: ["balanced"]
+
+  MaxPoolClassifier:
+    enabled: true
+    hyperparameters:
+      C: [0.01, 0.1, 1.0, 10.0]
+      class_weight: ["balanced"]
+
+  GeMPoolClassifier:
+    enabled: true
+    hyperparameters:
+      p: [2.0, 3.0, 4.0]
+      C: [0.01, 0.1, 1.0]
+      class_weight: ["balanced"]
+
+  # ── MIL (PyTorch) ────────────────────────────────────────────────────────
+  ABMILClassifier:
+    enabled: true
+    hyperparameters:
+      hidden_dim: [64, 128, 256]
+      dropout: [0.1, 0.25]
+      lr: [1.0e-4, 3.0e-4]
+      max_epochs: [100]
+      patience: [15]
+      class_weight: ["balanced"]
+
+  GatedABMILClassifier:
+    enabled: true
+    hyperparameters:
+      hidden_dim: [64, 128]
+      dropout: [0.1, 0.25]
+      lr: [3.0e-4]
+      max_epochs: [100]
+      patience: [15]
+      class_weight: ["balanced"]
+
+  DSMILClassifier:
+    enabled: true
+    hyperparameters:
+      hidden_dim: [64, 128]
+      dropout: [0.1, 0.25]
+      lr: [3.0e-4]
+      max_epochs: [100]
+      patience: [15]
+      class_weight: ["balanced"]
+
+  TransformerMILClassifier:
+    enabled: true
+    hyperparameters:
+      d_model: [128, 256]
+      num_layers: [1, 2]
+      n_heads: [4]
+      dropout: [0.1]
+      lr: [3.0e-4]
+      max_epochs: [100]
+      patience: [15]
+      class_weight: ["balanced"]
+
+  # ── Time-series (PyTorch, adapter) ───────────────────────────────────────
+  InceptionTimeClassifier:
+    enabled: true
+    hyperparameters:
+      n_filters: [16, 32]
+      depth: [2, 3]
+      lr: [3.0e-4]
+      max_epochs: [100]
+      patience: [15]
+      class_weight: ["balanced"]
+
+  ALSTMFCNClassifier:
+    enabled: true
+    hyperparameters:
+      lstm_units: [32, 64]
+      conv_filters: [64, 128]
+      dropout: [0.1]
+      lr: [3.0e-4]
+      max_epochs: [100]
+      patience: [15]
+      class_weight: ["balanced"]
+
+  # ── Aeon ─────────────────────────────────────────────────────────────────
+  MultiRocketClassifier:
+    enabled: true
+    hyperparameters:
+      n_kernels: [100, 500, 1000]
+      class_weight: ["balanced"]

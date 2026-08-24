@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sliceheads"
+version = "0.1.0"
+description = "Benchmarking toolkit for comparing classification heads on 2D slice embeddings from 3D medical volumes"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Moshe Amitay" }]
+dependencies = [
+    "numpy",
+    "h5py",
+    "scikit-learn",
+    "torch",
+    "aeon",
+    "nibabel",
+    "transformers",
+    "pyyaml",
+    "pandas",
+    "scipy",
+    "pyarrow",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sliceheads*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]

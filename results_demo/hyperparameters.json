@@ -1,0 +1,11 @@
+{
+  "MeanPoolClassifier": {
+    "C": 1.0,
+    "class_weight": "balanced"
+  },
+  "GeMPoolClassifier": {
+    "p": 2.0,
+    "C": 1.0,
+    "class_weight": "balanced"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "sliceheads_version": "0.1.0",
+  "python_version": "3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0]",
+  "platform": "Linux-6.17.0-23-generic-x86_64-with-glibc2.39",
+  "torch_version": "2.10.0a0+b558c986e8.nv25.11",
+  "cuda_available": true,
+  "cuda_device": "NVIDIA GeForce RTX 5090",
+  "timestamp": "2026-06-23T18:14:25.315472+00:00"
+}
